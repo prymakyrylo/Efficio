@@ -87,14 +87,16 @@
             font-weight: 800;
             margin-bottom: 10px;
             line-height: 1.2;
-            animation: fadeInUp 1s ease-out;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.2s forwards;
         }
 
         .hero .tagline {
             font-size: clamp(1.2rem, 3vw, 1.5rem);
             color: #a0a0a0;
             margin-bottom: 30px;
-            animation: fadeInUp 1s ease-out 0.2s both;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.4s forwards;
         }
 
         .hero .description {
@@ -103,7 +105,8 @@
             color: #c0c0c0;
             max-width: 800px;
             margin: 0 auto 40px;
-            animation: fadeInUp 1s ease-out 0.4s both;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.6s forwards;
         }
 
         .cta-button {
@@ -118,7 +121,8 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 1s ease-out 0.6s both;
+            opacity: 0;
+            animation: slideUp 0.8s ease-out 0.8s forwards;
         }
 
         .cta-button::before {
@@ -298,8 +302,82 @@
             color: #00d4ff;
         }
 
-        /* Footer */
-        footer {
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .contact h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            background: linear-gradient(45deg, #00d4ff, #7c3aed);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .contact-card:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .contact-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: #00d4ff;
+        }
+
+        .contact-card p {
+            color: #a0a0a0;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .contact-email {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .contact-email:hover {
+            color: #7c3aed;
+        }
+
+        .app-feedback {
+            background: rgba(124, 58, 237, 0.1);
+            border: 1px solid rgba(124, 58, 237, 0.3);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+
+        .app-feedback p {
+            margin: 0;
+            font-size: 0.9rem;
+            color: #c0c0c0;
+        }
             padding: 60px 0 30px;
             text-align: center;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -333,7 +411,7 @@
         }
 
         /* Animations */
-        @keyframes fadeInUp {
+        @keyframes slideUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -346,11 +424,22 @@
 
         @keyframes float {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
         }
 
         .floating {
-            animation: float 3s ease-in-out infinite;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         /* Responsive */
@@ -376,14 +465,19 @@
         /* Scroll animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
         }
+
+        .stagger-1 { transition-delay: 0.1s; }
+        .stagger-2 { transition-delay: 0.2s; }
+        .stagger-3 { transition-delay: 0.3s; }
+        .stagger-4 { transition-delay: 0.4s; }
     </style>
 </head>
 <body>
@@ -394,6 +488,7 @@
                 <li><a href="#features">Features</a></li>
                 <li><a href="#insights">AI Insights</a></li>
                 <li><a href="#core">Core Features</a></li>
+                <li><a href="#contact">Contact</a></li>
                 <li><a href="#download">Download</a></li>
             </ul>
         </nav>
@@ -420,20 +515,20 @@
                 <p style="font-size: 1.1rem; color: #c0c0c0; max-width: 600px; margin: 0 auto;">
                     No fluff. No noise. Just actionable, data-driven feedback that helps you get better every day.
                 </p>
-                <div class="insights-grid fade-in">
-                    <div class="insight-item">
+                <div class="insights-grid">
+                    <div class="insight-item fade-in stagger-1">
                         <h4>🎯 Peak Performance Hours</h4>
                         <p>Identify when you're most productive and schedule your hardest tasks accordingly</p>
                     </div>
-                    <div class="insight-item">
+                    <div class="insight-item fade-in stagger-2">
                         <h4>📉 Least Productive Days</h4>
                         <p>Spot patterns in your off-days and adjust your routine to minimize them</p>
                     </div>
-                    <div class="insight-item">
+                    <div class="insight-item fade-in stagger-3">
                         <h4>⏱️ Optimal Focus Duration</h4>
                         <p>Find your perfect focus session length for maximum deep work efficiency</p>
                     </div>
-                    <div class="insight-item">
+                    <div class="insight-item fade-in stagger-4">
                         <h4>📊 Data-Driven Habits</h4>
                         <p>Build habits backed by real data about your behavior - not guesswork</p>
                     </div>
@@ -445,22 +540,22 @@
             <div class="container">
                 <h2>Core Features</h2>
                 <div class="core-grid">
-                    <div class="core-card fade-in">
+                    <div class="core-card fade-in stagger-1">
                         <div class="feature-icon">📝</div>
                         <h3>Smart To-Do Lists</h3>
                         <p>Simple, fast, and frictionless task management that learns from your habits and suggests optimal scheduling</p>
                     </div>
-                    <div class="core-card fade-in">
+                    <div class="core-card fade-in stagger-2">
                         <div class="feature-icon">⏲️</div>
                         <h3>Intelligent Focus Timer</h3>
                         <p>Designed for deep focus and habit reinforcement with AI-optimized session lengths based on your performance data</p>
                     </div>
-                    <div class="core-card fade-in">
+                    <div class="core-card fade-in stagger-3">
                         <div class="feature-icon">🧠</div>
                         <h3>AI Insights & Statistics</h3>
                         <p>Track your work patterns and get personalized insights from your habits to continuously improve your productivity</p>
                     </div>
-                    <div class="core-card fade-in">
+                    <div class="core-card fade-in stagger-4">
                         <div class="feature-icon">🏆</div>
                         <h3>Achievement System</h3>
                         <p>Visualize your progress with meaningful milestones and stay motivated with data-driven achievements</p>
@@ -506,6 +601,32 @@
                 </div>
             </div>
         </section>
+
+        <section class="contact" id="contact">
+            <div class="container">
+                <h2>Get in Touch</h2>
+                <p style="text-align: center; color: #a0a0a0; font-size: 1.1rem; margin-bottom: 20px;">
+                    Questions, suggestions, or just want to say hello? We'd love to hear from you.
+                </p>
+                
+                <div class="contact-grid">
+                    <div class="contact-card fade-in">
+                        <h3>📧 Email Us</h3>
+                        <p>Have a question or need support? Drop us a line and we'll get back to you quickly.</p>
+                        <a href="mailto:prymakyrylo@gmail.com" class="contact-email">prymakyrylo@gmail.com</a>
+                    </div>
+                    
+                    <div class="contact-card fade-in">
+                        <h3>💬 Share Feedback</h3>
+                        <p>Your insights help us improve Efficio. We value every piece of feedback!</p>
+                        <a href="mailto:prymakyrylo@gmail.com?subject=Efficio Feedback" class="contact-email">Send Feedback</a>
+                        <div class="app-feedback">
+                            <p>💡 <strong>Pro Tip:</strong> You can also send feedback directly through the Efficio app - just look for the Profile tab!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
 
     <footer id="download">
@@ -516,8 +637,9 @@
                 <a href="#" class="cta-button floating">Download Efficio Now</a>
             </div>
             <div class="footer-links">
-                <a href="https://prymakyrylo.github.io/efficio-privacy-policy/" target="_blank">Privacy Policy</a>
-                <a href="https://prymakyrylo.github.io/efficio-terms-of-use/" target="_blank">Terms of Use</a>
+                <a href="https://prymakyrylo.github.io/efficio-privacy-policy/" target="_blank" rel="noopener">Privacy Policy</a>
+                <a href="https://prymakyrylo.github.io/efficio-terms-of-use/" target="_blank" rel="noopener">Terms of Use</a>
+                <a href="mailto:prymakyrylo@gmail.com">Contact Us</a>
                 <a href="#features">Features</a>
                 <a href="#insights">AI Insights</a>
             </div>
@@ -540,10 +662,10 @@
             });
         });
 
-        // Scroll animations
+        // Scroll animations with better timing
         const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            threshold: 0.15,
+            rootMargin: '0px 0px -100px 0px'
         };
 
         const observer = new IntersectionObserver((entries) => {
@@ -559,34 +681,30 @@
             observer.observe(el);
         });
 
-        // Add some interactive hover effects
+        // Smooth hover effects for cards
         document.querySelectorAll('.feature-card, .core-card').forEach(card => {
             card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
+                this.style.transform = 'translateY(-8px)';
+                this.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
             });
             
             card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
+                this.style.transform = 'translateY(0)';
             });
         });
 
-        // Parallax effect for hero section
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const hero = document.querySelector('.hero');
-            if (hero) {
-                hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
+        // Enhanced button hover effects
+        document.querySelectorAll('.cta-button').forEach(button => {
+            button.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-2px)';
+                this.style.boxShadow = '0 10px 25px rgba(0, 212, 255, 0.4)';
+            });
+            
+            button.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = 'none';
+            });
         });
-
-        // Add dynamic gradient animation
-        const hero = document.querySelector('.hero');
-        let gradientAngle = 135;
-        
-        setInterval(() => {
-            gradientAngle += 0.5;
-            document.body.style.background = `linear-gradient(${gradientAngle}deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%)`;
-        }, 100);
     </script>
 </body>
 </html>
